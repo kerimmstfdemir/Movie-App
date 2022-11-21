@@ -8,6 +8,6 @@ export const LoginStyledDıvImg = styled.div`
   background-position: center;
 `;
 
-export const LoginStyledImg = styled.img`
-
-`;
+export const LoginStyledForm = styled.div`
+  width: 50%;
+`
