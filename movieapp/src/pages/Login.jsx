@@ -47,7 +47,7 @@ const Login = () => {
           autoComplete="off"
         >
           <div className="d-flex flex-column align-items-center">
-            <TextField id="outlined-required" label="Required" type="email" sx={{ m : 1, width:"80% !important"}}/>
+            <TextField id="outlined-required" label="Email" type="email" sx={{ m : 1, width:"80% !important"}}/>
             <FormControl sx={{ m: 1, width: '80%' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
               <OutlinedInput
