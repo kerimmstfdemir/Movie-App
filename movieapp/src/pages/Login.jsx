@@ -42,7 +42,8 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if(email.includes("@")) {
+    const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if(email.match(reg)) {
       setEmailError(false)
     } else {
       setEmailError(true)
