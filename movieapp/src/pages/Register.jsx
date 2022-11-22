@@ -72,7 +72,7 @@ const Register = () => {
       setPasswordError(false)
     }
     
-    if (!emailError) {
+    if (!emailError && !passwordError) {
       try {
         const user = await createUserWithEmailAndPassword(auth, email, password);
         dispatch({type:REGISTER, payload:user, email:email, password:password})
@@ -128,7 +128,7 @@ const Register = () => {
                 required
                 placeholder="Please enter at least 6 character..."
                 error={passwordError}
-                onChangeCapture={(e) => dispatch({type:REGISTER, password:e.target.value, email:email, user:user})}
+                onChangeCapture={(e) => dispatch({type:REGISTER, password:e.target.value, email:email, PAYLOAD:user})}
               />
               <Button sx={{ marginTop: "1rem", width: "100%" }} type="submit" variant="contained" onClick={handleRegister}>Register</Button>
             </FormControl>
