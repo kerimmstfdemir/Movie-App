@@ -14,6 +14,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../authentication/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { REGISTER } from "../redux/types/reduxTypes";
+import registerTrueImg from "../assets/registertrue.png"
+import registerUnsuccessImg from "../assets/registerwrong.png"
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -30,6 +32,7 @@ const Register = () => {
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)  
   const [registerSuccess, setRegisterSuccess] = useState(false)
+  const [registerUnsuccess, setRegisterUnsuccess] = useState(false)
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -56,12 +59,15 @@ const Register = () => {
     const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if(email.match(reg)) {
       setEmailError(false)
+      setRegisterUnsuccess(false)
     } else {
       setEmailError(true)
+      setRegisterUnsuccess(true)
     }
 
     if(String(password).length < 6) {
       setPasswordError(true)
+      setRegisterUnsuccess(true)
     } else {
       setPasswordError(false)
     }
@@ -71,6 +77,7 @@ const Register = () => {
         const user = await createUserWithEmailAndPassword(auth, email, password);
         dispatch({type:REGISTER, payload:user, email:email, password:password})
         setRegisterSuccess(true)
+        setRegisterUnsuccess(false)
       } catch(error) {
         console.log(error.message);
       }
@@ -129,7 +136,8 @@ const Register = () => {
           </div>
         </Box>
         <div className="d-flex justify-content-center mt-1">
-        {registerSuccess && <img style={{width:"3rem"}} src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" alt="successfully-registered" />}
+        {registerSuccess && <img style={{width:"3rem"}} src={registerTrueImg} alt="successfully-registered" />}
+        {registerUnsuccess && <img style={{width:"3rem"}} src={registerUnsuccessImg} alt="successfully-registered" />}
         </div>
         
       </RegisterStyledForm>
