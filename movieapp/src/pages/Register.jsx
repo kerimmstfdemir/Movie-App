@@ -10,6 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../authentication/firebase";
 
 const Register = () => {
 
@@ -19,7 +21,9 @@ const Register = () => {
   });
 
   const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [emailError, setEmailError] = useState(false)
+  const [registerSuccess, setRegisterSuccess] = useState(false)
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -36,17 +40,23 @@ const Register = () => {
     event.preventDefault();
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value)
-  }
-
-  const handleLogin = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const reg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if(email.match(reg)) {
       setEmailError(false)
     } else {
       setEmailError(true)
+    }
+    
+    if (!emailError) {
+      try {
+        const user = await createUserWithEmailAndPassword(auth, email, password);
+        setRegisterSuccess(true)
+        console.log(user)
+      } catch(error) {
+        console.log(error.message);
+      }
     }
   }
 
@@ -66,7 +76,9 @@ const Register = () => {
           autoComplete="off"
         >
           <div className="d-flex flex-column align-items-center">
-          <TextField id="outlined-required" label="Email" type="" required sx={{ width: "80% !important" }} fullWidth error={emailError} helperText={emailError && "Invalid Email"} onChange={handleEmail}/>
+          <TextField id="outlined-required" label="Email" type="" required sx={{ width: "80% !important" }} fullWidth error={emailError} helperText={emailError && "Invalid Email"} onChange={(e) => {
+            setEmail(e.target.value)
+            setRegisterSuccess(false)}}/>
             <FormControl sx={{ m: 1, width: '80%' }} variant="outlined">
               
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
@@ -89,12 +101,17 @@ const Register = () => {
                 }
                 label="Password"
                 required
+                onChangeCapture={(e) => setPassword(e.target.value)}
               />
-              <Button sx={{ marginTop: "1rem", width: "100%" }} type="submit" variant="contained" onClick={handleLogin}>Register</Button>
+              <Button sx={{ marginTop: "1rem", width: "100%" }} type="submit" variant="contained" onClick={handleRegister}>Register</Button>
             </FormControl>
 
           </div>
         </Box>
+        <div className="d-flex justify-content-center mt-1">
+        {registerSuccess && <img style={{width:"3rem"}} src="https://cdn1.iconfinder.com/data/icons/warnings-and-dangers/400/Warning-02-512.png" alt="successfully-registered" />}
+        </div>
+        
       </RegisterStyledForm>
     </div>
   );
