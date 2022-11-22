@@ -84,9 +84,6 @@ const Register = () => {
     }
   }
 
-  console.log(`user: ${email} password: ${password}`)
-  console.log(user)
-
   return (
     <div className="d-flex">
       <RegisterStyledDıvImg>

@@ -20,7 +20,7 @@ const Login = () => {
   const email = useSelector((state) => state.email)
   const password = useSelector((state) => state.password)
   const user = useSelector((state) => state.user)
-  const loginInformation = useSelector((state) => state.login)
+  const loginInformation = useSelector((state) => state.loginInformation)
 
 
   const [values, setValues] = useState({
