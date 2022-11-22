@@ -18,6 +18,9 @@ const Login = () => {
     showPassword: false,
   });
 
+  const [email, setEmail] = useState("")
+  const [emailError, setEmailError] = useState(false)
+
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -33,6 +36,19 @@ const Login = () => {
     event.preventDefault();
   };
 
+  const handleEmail = (e) => {
+    setEmail(e.target.value)
+  }
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if(email.includes("@")) {
+      setEmailError(false)
+    } else {
+      setEmailError(true)
+    }
+  }
+
   return (
     <div className="d-flex">
       <LoginStyledDıvImg></LoginStyledDıvImg>
@@ -47,8 +63,9 @@ const Login = () => {
           autoComplete="off"
         >
           <div className="d-flex flex-column align-items-center">
-            <TextField id="outlined-required" label="Email" type="email" sx={{ m : 1, width:"80% !important"}}/>
+          <TextField id="outlined-required" label="Email" type="" required sx={{ width: "80% !important" }} fullWidth error={emailError} helperText={emailError && "Invalid Email"} onChange={handleEmail}/>
             <FormControl sx={{ m: 1, width: '80%' }} variant="outlined">
+              
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
               <OutlinedInput
                 id="outlined-adornment-password"
@@ -68,11 +85,12 @@ const Login = () => {
                   </InputAdornment>
                 }
                 label="Password"
+                required
               />
-              <Button sx={{ marginTop:"1rem", width:"100%"}} type="submit" variant="contained">Login</Button>
-              <Button sx={{ marginTop:"1rem", width:"100%", textTransform:"initial"}} variant="contained">Continue with Google</Button>
+              <Button sx={{ marginTop: "1rem", width: "100%" }} type="submit" variant="contained" onClick={handleLogin}>Login</Button>
+              <Button sx={{ marginTop: "1rem", width: "100%", textTransform: "initial" }} variant="contained">Continue with Google</Button>
             </FormControl>
-            
+
           </div>
         </Box>
       </LoginStyledForm>
