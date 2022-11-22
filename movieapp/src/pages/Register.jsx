@@ -28,6 +28,7 @@ const Register = () => {
   });
 
   const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)  
   const [registerSuccess, setRegisterSuccess] = useState(false)
 
   const handleChange = (prop) => (event) => {
@@ -46,7 +47,7 @@ const Register = () => {
   };
 
   const handleRegisterEmail = (e) => {
-    dispatch({type: REGISTER, email:e.target.value, password:password, user:user})
+    dispatch({type: REGISTER, email:e.target.value, password:password, payload:user})
     setRegisterSuccess(false);
   }
 
@@ -57,6 +58,12 @@ const Register = () => {
       setEmailError(false)
     } else {
       setEmailError(true)
+    }
+
+    if(String(password).length < 6) {
+      setPasswordError(true)
+    } else {
+      setPasswordError(false)
     }
     
     if (!emailError) {
@@ -112,6 +119,8 @@ const Register = () => {
                 }
                 label="Password"
                 required
+                placeholder="Please enter at least 6 character..."
+                error={passwordError}
                 onChangeCapture={(e) => dispatch({type:REGISTER, password:e.target.value, email:email, user:user})}
               />
               <Button sx={{ marginTop: "1rem", width: "100%" }} type="submit" variant="contained" onClick={handleRegister}>Register</Button>
