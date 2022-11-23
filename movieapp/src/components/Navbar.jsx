@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from "../authentication/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT } from "../redux/types/reduxTypes";
+import { signOut } from 'firebase/auth';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -17,6 +18,17 @@ const Navbar = () => {
 
     console.log(user)
 
+    const handleLogout = async () => {
+      try {
+        await signOut(auth);
+        dispatch({type:LOGOUT})
+        navigate("/")
+      } catch(error) {
+        console.log(error.message);
+      }
+    }
+
+    console.log(loginInformation)
   return (
     <div>
          <Box sx={{ flexGrow: 1 }}>
@@ -31,7 +43,7 @@ const Navbar = () => {
           </div>) }
           { loginInformation && (<div>
           <h5 style={{display:"inline"}}>{user?.user?.email}</h5>
-          <Button sx={{fontSize:"medium"}} color="inherit" onClick={() => navigate("/register")}>Logout</Button>
+          <Button sx={{fontSize:"medium"}} color="inherit" onClick={() => navigate("/register")} onClick={handleLogout}>Logout</Button>
           </div>) }
         </Toolbar>
       </AppBar>
