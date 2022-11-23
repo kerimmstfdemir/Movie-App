@@ -6,6 +6,8 @@ import Main from "./pages/Main";
 import Register from "./pages/Register";
 import { Provider } from "react-redux";
 import { store } from "./redux";
+import PrivateRouter from "./router/PrivateRouter";
+import MovieDetail from "./pages/MovieDetail";
 
 function App() {
 
@@ -19,6 +21,9 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/details" element={<PrivateRouter />}>
+            <Route path="" element={<MovieDetail />}/>
+          </Route>
         </Routes>
       </Provider>
     </div>

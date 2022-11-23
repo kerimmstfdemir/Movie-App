@@ -1,0 +1,7 @@
+.card:hover .overview {
+    transform: translateY(0%);
+}
+
+.movie-img:hover {
+    filter: grayscale(60%);
+}

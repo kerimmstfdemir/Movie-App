@@ -1,21 +1,36 @@
-import { margin } from '@mui/system';
 import Card from 'react-bootstrap/Card';
+import { MovieCardOverview } from './MovieCard.styled';
+import "./moviecard.css"
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const MovieCard = ({ dataMovies:{data} }) => {
+    const navigate = useNavigate();
+    const loginInformation = useSelector((state) => state.loginInformation)
     console.log(data);
     return (
         <div className=" text-center d-flex flex-row justify-content-center flex-wrap" style={{ gap:"1rem"}}>
             {data?.results.map((result) => {
                 const { backdrop_path, original_title, overview } = result
+                const handleMovieDetails = () => {
+                    if(loginInformation) {
+                        navigate("/details")
+                    } else {
+                        alert("Please log in to see movie details")
+                    }
+                }
                 return (
                     <>
-                        <Card style={{width:"25rem", height:"28rem"}}>
-                            <Card.Img style={{height:"65%"}} variant="top" src={`https://image.tmdb.org/t/p/w1280${backdrop_path}`} />
+                        <Card className='card' style={{width:"26rem", height:"27rem", overflow:"hidden", cursor:"pointer"}} onClick={handleMovieDetails}>
+                            <Card.Img className='movie-img' style={{height:"92%"}} variant="top" src={`https://image.tmdb.org/t/p/w1280${backdrop_path}`} />
                             <Card.Body>
                                 <Card.Text>
                                     {original_title}
                                 </Card.Text>
                             </Card.Body>
+                            <MovieCardOverview className='overview'>
+                                <p>{overview}</p>
+                            </MovieCardOverview>
                         </Card>
                     </>
                 )
