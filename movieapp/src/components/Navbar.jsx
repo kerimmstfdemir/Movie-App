@@ -15,7 +15,7 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const loginInformation = useSelector((state) => state.loginInformation);
     const user = useSelector((state) => state.user);
-
+    
     console.log(user)
 
     const handleLogout = async () => {
