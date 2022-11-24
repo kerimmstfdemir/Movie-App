@@ -11,7 +11,7 @@ const MovieCard = ({ dataMovies:{data} }) => {
     return (
         <div className=" text-center d-flex flex-row justify-content-center flex-wrap" style={{ gap:"1rem"}}>
             {data?.results.map((result) => {
-                const { backdrop_path, original_title, overview } = result
+                const { poster_path, original_title, overview } = result
                 const handleMovieDetails = () => {
                     if(loginInformation) {
                         navigate("/details")
@@ -21,8 +21,8 @@ const MovieCard = ({ dataMovies:{data} }) => {
                 }
                 return (
                     <>
-                        <Card className='card' style={{width:"26rem", height:"27rem", overflow:"hidden", cursor:"pointer"}} onClick={handleMovieDetails}>
-                            <Card.Img className='movie-img' style={{height:"92%"}} variant="top" src={`https://image.tmdb.org/t/p/w1280${backdrop_path}`} />
+                        <Card className='card' style={{width:"25.5rem", height:"30rem", overflow:"hidden", cursor:"pointer"}} onClick={handleMovieDetails}>
+                            <Card.Img className='movie-img' style={{height:"90%"}} variant="top" src={`https://image.tmdb.org/t/p/w1280${poster_path}`} />
                             <Card.Body>
                                 <Card.Text>
                                     {original_title}

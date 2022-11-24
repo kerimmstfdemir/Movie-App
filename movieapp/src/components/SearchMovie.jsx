@@ -3,12 +3,12 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const SearchMovie = () => {
+const SearchMovie = ({ searchMovie, setSearchMovie, searchMovies }) => {
     return (
         <div>
             <Box className='d-flex justify-content-center m-4' component="form" sx={{ '& > :not(style)': { m: 1, width: '25ch' }}} noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Search Movie" placeholder='Please enter a movie...' variant="outlined" margin='none' />
-                <Button sx={{width:"5.5rem !important", height:"3rem", margin:"0.65rem 0rem !important"}} variant="contained">Search</Button>
+                <TextField id="outlined-basic" label="Search Movie" placeholder='Please enter a movie...' variant="outlined" margin='none' onChange={(e)=>setSearchMovie(e.target.value)}/>
+                <Button sx={{width:"5.5rem !important", height:"3rem", margin:"0.65rem 0rem !important"}} variant="contained" onClick={()=>searchMovie && searchMovies()}>Search</Button>
             </Box>
             
         </div>
