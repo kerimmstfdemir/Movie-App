@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 const MovieCard = ({ dataMovies:{data} }) => {
     const navigate = useNavigate();
     const loginInformation = useSelector((state) => state.loginInformation)
-    console.log(data);
     return (
         <div className=" text-center d-flex flex-row justify-content-center flex-wrap" style={{ gap:"1rem"}}>
             {data?.results.map((result) => {

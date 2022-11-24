@@ -25,7 +25,7 @@ const Main = () => {
   }
 
   useEffect(() => {
-    getMovies();
+    searchMovie ? searchMovies() : getMovies();
   }, [pageNumber]);
 
   console.log(dataMovies);
@@ -33,7 +33,7 @@ const Main = () => {
     <div>
       <SearchMovie searchMovie={searchMovie} setSearchMovie={setSearchMovie} searchMovies={searchMovies}/>
       <MovieCard dataMovies={dataMovies}/>
-      <PageNumber pageNumber={pageNumber} setPageNumber={setPageNumber}/>
+      <PageNumber totalpages={dataMovies.data.total_pages} pageNumber={pageNumber} setPageNumber={setPageNumber}/>
     </div>
   );
 };
