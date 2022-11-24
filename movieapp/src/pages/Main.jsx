@@ -34,7 +34,7 @@ const Main = () => {
   console.log(dataMovies);
   return (
     <div>
-      <SearchMovie searchMovie={searchMovie} setSearchMovie={setSearchMovie} searchMovies={searchMovies}/>
+      <SearchMovie searchMovie={searchMovie} setSearchMovie={setSearchMovie} searchMovies={searchMovies} setPageNumber={setPageNumber} pageNumber={pageNumber}/>
       <MovieCard dataMovies={dataMovies}/>
       <PageNumber totalpages={totalPages} pageNumber={pageNumber} setPageNumber={setPageNumber}/>
     </div>

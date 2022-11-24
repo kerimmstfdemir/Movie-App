@@ -3,10 +3,10 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 
-const SearchMovie = ({ searchMovie, setSearchMovie, searchMovies }) => {
+const SearchMovie = ({ searchMovie, setSearchMovie, searchMovies, pageNumber, setPageNumber }) => {
     const handleSearch = (e) => {
         if(searchMovie) {
-            searchMovies();
+            pageNumber === 1 ? searchMovies() : setPageNumber(1)
         }
     }
     const handleKeyDown = (e) => {
