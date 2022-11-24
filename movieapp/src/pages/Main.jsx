@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "../components/MovieCard";
 import SearchMovie from "../components/SearchMovie";
 import axios from "axios";
+import PageNumber from "../components/PageNumber";
 
 const Main = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -23,6 +24,7 @@ const Main = () => {
     <div>
       <SearchMovie />
       <MovieCard dataMovies={dataMovies}/>
+      <PageNumber />
     </div>
   );
 };
