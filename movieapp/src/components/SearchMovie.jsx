@@ -2,12 +2,18 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useSelector } from 'react-redux';
 
 const SearchMovie = ({ searchMovie, setSearchMovie, searchMovies, pageNumber, setPageNumber }) => {
+    const loginInformation = useSelector((state) => state.loginInformation)
+
     const handleSearch = (e) => {
-        if(searchMovie) {
-            pageNumber === 1 ? searchMovies() : setPageNumber(1)
+        if(loginInformation){
+            searchMovie && (pageNumber === 1 ? searchMovies() : setPageNumber(1))
+        }else{
+            alert("Please log in to search movie.")
         }
+
     }
     const handleKeyDown = (e) => {
         if(e.keyCode === 13) {

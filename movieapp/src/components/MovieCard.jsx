@@ -13,7 +13,7 @@ const MovieCard = ({ dataMovies:{data} }) => {
                 const { poster_path, original_title, overview } = result
                 const handleMovieDetails = () => {
                     if(loginInformation) {
-                        navigate("/details")
+                        navigate("/details", {state:result})
                     } else {
                         alert("Please log in to see movie details")
                     }
