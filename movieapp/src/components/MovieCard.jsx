@@ -20,10 +20,10 @@ const MovieCard = ({ dataMovies:{data} }) => {
                 }
                 return (
                     <>
-                        <Card className='card' style={{width:"25.5rem", height:"30rem", boxShadow: "11px 13px 19px 2px rgba(0,0,0,0.75)", overflow:"hidden", cursor:"pointer"}} onClick={handleMovieDetails}>
-                            <Card.Img className='movie-img' style={{height:"90%"}} variant="top" src={`https://image.tmdb.org/t/p/w1280${poster_path}`} />
+                        <Card className='card' style={{width:"25.5rem", height:"30rem", backgroundColor:"#1e1e1e", boxShadow: "11px 13px 19px 2px rgba(0,0,0,0.75)", overflow:"hidden", cursor:"pointer"}} onClick={handleMovieDetails}>
+                            <Card.Img className='movie-img' style={{height:"87%"}} variant="top" src={`https://image.tmdb.org/t/p/w1280${poster_path}`} />
                             <Card.Body>
-                                <Card.Text>
+                                <Card.Text style={{color:"white", fontSize:"larger"}}>
                                     {original_title}
                                 </Card.Text>
                             </Card.Body>
