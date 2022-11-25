@@ -10,8 +10,7 @@ const MovieDetail = () => {
   const navigate = useNavigate()
   const { state:movieDetails } = useLocation();
   const [videoKey, setVideoKey] = useState("");
-  const { id, title, poster_path, overview
-  } = movieDetails;
+  const { id, title, poster_path, overview, release_date, vote_average, vote_count} = movieDetails;
   const API_KEY = process.env.REACT_APP_API_KEY;
   const videoUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
 
@@ -45,10 +44,30 @@ const MovieDetail = () => {
       </div>
 
       <div className="d-flex justify-content-center">
-        <div className="d-flex mt-4" style={{gap:"1rem", maxWidth:"70rem", borderRadius:"20px", backgroundColor:"#DFFBFC"}}>
+        <div className="d-flex mt-4" style={{gap:"1rem", maxWidth:"70rem", borderRadius:"20px", backgroundColor:"rgba(27, 28, 30, 0.9)"}}>
         <img style={{width:"20rem", borderRadius:"20px"}} src={`https://image.tmdb.org/t/p/w1280${poster_path}`} />
-        
-        <MovieDetailedOverview>{overview}</MovieDetailedOverview>
+        <div className="d-flex flex-column justify-content-between p-3">
+          <div>
+          <h3 style={{color:"white"}}>Overview</h3>
+          <MovieDetailedOverview>{overview}</MovieDetailedOverview>
+          </div>
+          <div>
+            <table className="table table-bordered" style={{color:"white", fontSize:"large", lineHeight:"2.5rem"}}>
+              <tr>
+                <th scope="row">Release Date</th>
+                <td>{release_date}</td>
+              </tr>
+              <tr>
+                <th>Rate</th>
+                <td>{vote_average}</td>
+              </tr>
+              <tr>
+                <th>Total Vote</th>
+                <td>{vote_count}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
         </div>
       </div>
     <button onClick={()=>navigate(-1)}>Go Back</button>
