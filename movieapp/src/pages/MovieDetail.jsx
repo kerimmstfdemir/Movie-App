@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -25,13 +26,19 @@ const MovieDetail = () => {
     getMovieVideos();
   }, [])
   
-  console.log(videoKey);
   return (
     <>
-    <div>
-      <h2>{title}</h2>
-      <iframe src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=1`} frameborder="0"></iframe>
-    </div>
+    <div style={{gap:"1rem"}} className="d-flex flex-column justify-content-center align-items-center m-1">
+      <h2 className="text-center mt-2">{title}</h2>
+        <div style={{maxWidth:"65rem"}} className="ratio ratio-16x9">
+          <iframe
+            className="rounded-xl"
+            src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&mute=1`}
+            title="YouTube video"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
     <button onClick={()=>navigate(-1)}>Go Back</button>
     </>
   )
