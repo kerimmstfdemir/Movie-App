@@ -16,6 +16,7 @@ const Navbar = ({ setPageNumber }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const loginInformation = useSelector((state) => state.loginInformation);
+    const dataMovies = useSelector((state) => state.dataMovies)
     const user = useSelector((state) => state.user);
     
     console.log(user)
@@ -29,7 +30,7 @@ const Navbar = ({ setPageNumber }) => {
     const handleLogout = async () => {
       try {
         await signOut(auth);
-        dispatch({type:LOGOUT})
+        dispatch({type:LOGOUT, datamovies:dataMovies})
         setPageNumber(1)
         navigate("/")
         toastSuccessNotify("Logged out successfully!")

@@ -33,7 +33,13 @@ const reduxReducer = (state = initialStates, action) => {
                 searchMovie:action.search}
 
         case LOGOUT :
-            return initialStates;
+            return {...state,
+                email:"",
+                password:"",
+                loginInformation:false,
+                user:{}, 
+                dataMovies: action.datamovies,
+                searchMovie:""}
 
         default:
             return state;
