@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../authentication/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { REGISTER } from "../redux/types/reduxTypes";
@@ -30,6 +30,8 @@ const Register = () => {
     showPassword: false,
   });
 
+  const [userName, setUserName] = useState("")
+  const [userNameError, setUserNameError] = useState(false)
   const [emailError, setEmailError] = useState(false)
   const [passwordError, setPasswordError] = useState(false)  
   const [registerSuccess, setRegisterSuccess] = useState(false)
@@ -74,10 +76,22 @@ const Register = () => {
     } else {
       setPasswordError(false)
     }
+
+    if(String(userName).length < 5) {
+      setUserNameError(true)
+      setRegisterUnsuccess(true)
+      toastErrorNotify("Invalid username!")
+    } else {
+      setUserNameError(false)
+    }
     
-    if (!emailError && !passwordError) {
+    if (!emailError && !passwordError && !userNameError) {
       try {
         const user = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(auth.currentUser, {
+          displayName:userName
+        })
+        console.log(user);
         dispatch({type:REGISTER, payload:user, email:email, password:password})
         setRegisterSuccess(true)
         setRegisterUnsuccess(false)
@@ -90,6 +104,8 @@ const Register = () => {
       }
     }
   }
+
+  console.log(user)
 
   return (
     <div className="d-flex">
@@ -107,7 +123,9 @@ const Register = () => {
           autoComplete="off"
         >
           <div className="d-flex flex-column align-items-center">
-          <TextField id="outlined-required" label="Email" type="" required sx={{ width: "80% !important" }} fullWidth error={emailError} helperText={emailError && "Invalid Email"} onChange={handleRegisterEmail}/>
+          <TextField id="outlined-required" label="Username" type="text" required sx={{ width: "80% !important" }} fullWidth error={userNameError} placeholder="Define username at least 5 character..." helperText={userNameError && "Invalid Username"} onChange={(e)=>setUserName(e.target.value)}/>
+
+          <TextField id="outlined-required" label="Email" type="email" required sx={{ width: "80% !important" }} fullWidth error={emailError} helperText={emailError && "Invalid Email"} onChange={handleRegisterEmail}/>
             <FormControl sx={{ m: 1, width: '80%' }} variant="outlined">
               
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
