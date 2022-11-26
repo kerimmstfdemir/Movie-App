@@ -10,19 +10,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT } from "../redux/types/reduxTypes";
 import { signOut } from 'firebase/auth';
 import { toastSuccessNotify } from '../helpers/ToastifyNotifies';
+import { SEARCHMOVIE } from '../redux/types/reduxTypes';
 
-const Navbar = () => {
+const Navbar = ({ setPageNumber }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const loginInformation = useSelector((state) => state.loginInformation);
     const user = useSelector((state) => state.user);
+    const searchMovie = useSelector((state) => state.searchMovie)
     
     console.log(user)
+
+    const movieAppHome = () => {
+      navigate("/");
+      dispatch({type:SEARCHMOVIE, search:""})
+      setPageNumber(1);
+    }
 
     const handleLogout = async () => {
       try {
         await signOut(auth);
         dispatch({type:LOGOUT})
+        setPageNumber(1)
         navigate("/")
         toastSuccessNotify("Logged out successfully!")
       } catch(error) {
@@ -37,7 +46,7 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar className='d-flex justify-content-between'>
           <div>
-          <Typography variant="h5" component="h5" sx={{ flexGrow: 1, cursor:"pointer"}} onClick={() => navigate("/")}> Movie App </Typography>
+          <Typography variant="h5" component="h5" sx={{ flexGrow: 1, cursor:"pointer"}} onClick={movieAppHome}> Movie App </Typography>
           </div>
           { loginInformation || (<div>
           <Button sx={{fontSize:"medium"}} color="inherit" onClick={() => navigate("/login")}>Login</Button>

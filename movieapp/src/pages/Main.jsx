@@ -3,11 +3,14 @@ import MovieCard from "../components/MovieCard";
 import SearchMovie from "../components/SearchMovie";
 import axios from "axios";
 import PageNumber from "../components/PageNumber";
+import { useSelector, useDispatch } from "react-redux";
+import { DATAMOVIES } from "../redux/types/reduxTypes";
 
-const Main = () => {
-  const [dataMovies, setDataMovies] = useState({});
-  const [pageNumber, setPageNumber] = useState(1);
-  const [searchMovie, setSearchMovie] = useState("")
+const Main = ({ pageNumber, setPageNumber }) => {
+  const dispatch = useDispatch();
+  const dataMovies = useSelector((state) => state.dataMovies);
+  const loginInformation = useSelector((state) => state.loginInformation)
+  const searchMovie = useSelector((state) => state.searchMovie)
   const [totalPages, setTotalPages] =useState(1)
 
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -17,24 +20,27 @@ const Main = () => {
 
   const getMovies = async () => {
     const dataMovies = await axios(url);
-    setDataMovies(dataMovies);
+    dispatch({type: DATAMOVIES, datamovies:dataMovies})
     setTotalPages(dataMovies.data.total_pages)
   };
 
   const searchMovies = async () => {
     const searchMovies = await axios(searchMovieUrl)
-    setDataMovies(searchMovies);
+    dispatch({type: DATAMOVIES, datamovies:searchMovies})
     setTotalPages(dataMovies.data.total_pages)
   }
 
   useEffect(() => {
     searchMovie ? searchMovies() : getMovies();
-  }, [pageNumber]);
+  }, [pageNumber, searchMovie, dataMovies]);
+
+  
 
   console.log(dataMovies);
+  console.log(loginInformation);
   return (
     <div>
-      <SearchMovie searchMovie={searchMovie} setSearchMovie={setSearchMovie} searchMovies={searchMovies} setPageNumber={setPageNumber} pageNumber={pageNumber}/>
+      <SearchMovie searchMovies={searchMovies} setPageNumber={setPageNumber} pageNumber={pageNumber}/>
       <MovieCard dataMovies={dataMovies}/>
       <PageNumber totalpages={totalPages} pageNumber={pageNumber} setPageNumber={setPageNumber}/>
     </div>

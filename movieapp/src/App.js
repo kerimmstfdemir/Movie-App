@@ -9,18 +9,19 @@ import { store } from "./redux";
 import PrivateRouter from "./router/PrivateRouter";
 import MovieDetail from "./pages/MovieDetail";
 import { ToastContainer } from "react-toastify"
+import { useState } from "react";
 
 function App() {
 
-  
+  const [pageNumber, setPageNumber] = useState(1)
 
   return (
     <div>
       <Provider store={store}>
-        <Navbar />
+        <Navbar setPageNumber={setPageNumber}/>
         <ToastContainer />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Main pageNumber={pageNumber} setPageNumber={setPageNumber}/>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/details" element={<PrivateRouter />}>
