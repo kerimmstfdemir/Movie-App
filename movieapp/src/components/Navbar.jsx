@@ -42,7 +42,7 @@ const Navbar = () => {
           <Button sx={{fontSize:"medium"}} color="inherit" onClick={() => navigate("/register")}>Register</Button>
           </div>) }
           { loginInformation && (<div>
-          <h5 style={{display:"inline"}}>{user?.user?.email}</h5>
+          <h5 style={{display:"inline"}}>{user?.user?.email || user}</h5>
           <Button sx={{fontSize:"medium"}} color="inherit" onClick={() => navigate("/register")} onClick={handleLogout}>Logout</Button>
           </div>) }
         </Toolbar>

@@ -13,7 +13,7 @@ import { useState } from "react";
 import { auth } from "../authentication/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../redux/types/reduxTypes";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -32,7 +32,22 @@ const Login = () => {
   });
 
   const [emailError, setEmailError] = useState(false)
-  const [passwordError, setPasswordError] = useState(false)  
+  const [passwordError, setPasswordError] = useState(false) 
+  
+  const providerGoogle = new GoogleAuthProvider();
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, providerGoogle)
+    .then((result) => {
+      const userName = result.user.displayName;
+      localStorage.setItem("userName", userName)
+      dispatch({type:LOGIN, payload:localStorage.getItem("userName"), email:email, password:password, login:true})
+      navigate("/");
+    })
+    .catch((error) => {
+      console.log(error.message)
+    })
+  }
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -121,7 +136,7 @@ const Login = () => {
                 onChangeCapture={(e) => dispatch({type:LOGIN, password:e.target.value, email:email, payload:user, login:false})}
               />
               <Button sx={{ marginTop: "1rem", width: "100%" }} type="submit" variant="contained" onClick={handleLogin}>Login</Button>
-              <Button sx={{ marginTop: "1rem", width: "100%", textTransform: "initial" }} variant="contained">Continue with Google</Button>
+              <Button sx={{ marginTop: "1rem", width: "100%", textTransform: "initial" }} variant="contained" onClick={signInWithGoogle}>Continue with Google</Button>
             </FormControl>
 
           </div>
