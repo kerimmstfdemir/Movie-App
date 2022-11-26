@@ -9,6 +9,7 @@ import { auth } from "../authentication/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGOUT } from "../redux/types/reduxTypes";
 import { signOut } from 'firebase/auth';
+import { toastSuccessNotify } from '../helpers/ToastifyNotifies';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ const Navbar = () => {
         await signOut(auth);
         dispatch({type:LOGOUT})
         navigate("/")
+        toastSuccessNotify("Logged out successfully!")
       } catch(error) {
         console.log(error.message);
       }

@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./redux";
 import PrivateRouter from "./router/PrivateRouter";
 import MovieDetail from "./pages/MovieDetail";
+import { ToastContainer } from "react-toastify"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <div>
       <Provider store={store}>
         <Navbar />
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />

@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../redux/types/reduxTypes";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { toastSuccessNotify, toastErrorNotify } from "../helpers/ToastifyNotifies";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -57,10 +58,12 @@ const Login = () => {
       setEmailError(false)
     } else {
       setEmailError(true)
+      toastErrorNotify("Invalid email address!")
     }
 
     if(String(password).length < 6) {
       setPasswordError(true)
+      toastErrorNotify("Invalid password!")
     } else {
       setPasswordError(false)
     }
@@ -70,6 +73,7 @@ const Login = () => {
         const user = await signInWithEmailAndPassword(auth, email, password)
         dispatch({type:LOGIN, payload:user, email:email, password:password, login:true})
         navigate("/");
+        toastSuccessNotify("Logged in successfully!");
       } catch (error) {
         console.log(error.message)
       }

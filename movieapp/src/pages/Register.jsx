@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { REGISTER } from "../redux/types/reduxTypes";
 import registerTrueImg from "../assets/registertrue.png"
 import registerUnsuccessImg from "../assets/registerwrong.png"
+import { toastSuccessNotify, toastErrorNotify, toastInfoNotify } from "../helpers/ToastifyNotifies";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -63,11 +64,13 @@ const Register = () => {
     } else {
       setEmailError(true)
       setRegisterUnsuccess(true)
+      toastErrorNotify("Invalid email address!")
     }
 
     if(String(password).length < 6) {
       setPasswordError(true)
       setRegisterUnsuccess(true)
+      toastErrorNotify("Invalid password!")
     } else {
       setPasswordError(false)
     }
@@ -78,8 +81,12 @@ const Register = () => {
         dispatch({type:REGISTER, payload:user, email:email, password:password})
         setRegisterSuccess(true)
         setRegisterUnsuccess(false)
+        toastSuccessNotify("Registration completed successfully!")
+        toastInfoNotify("You can login now...")
       } catch(error) {
-        console.log(error.message);
+        toastErrorNotify("Registration failed!")
+        toastErrorNotify("This email has already been registed!")
+        toastInfoNotify("You can login with this email address.")
       }
     }
   }
