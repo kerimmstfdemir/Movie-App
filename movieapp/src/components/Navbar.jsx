@@ -17,7 +17,6 @@ const Navbar = ({ setPageNumber }) => {
     const dispatch = useDispatch();
     const loginInformation = useSelector((state) => state.loginInformation);
     const user = useSelector((state) => state.user);
-    const searchMovie = useSelector((state) => state.searchMovie)
     
     console.log(user)
 
