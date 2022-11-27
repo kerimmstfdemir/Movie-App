@@ -98,9 +98,8 @@ const Register = () => {
         toastSuccessNotify("Registration completed successfully!")
         toastInfoNotify("You can login now...")
       } catch(error) {
+        console.log(error)
         toastErrorNotify("Registration failed!")
-        toastErrorNotify("This email has already been registed!")
-        toastInfoNotify("You can login with this email address.")
       }
     }
   }
