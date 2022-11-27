@@ -31,6 +31,7 @@ const Navbar = ({ setPageNumber }) => {
         dispatch({type:LOGOUT, datamovies:dataMovies})
         setPageNumber(1)
         navigate("/")
+        localStorage.removeItem("userName")
         toastSuccessNotify("Logged out successfully!")
       } catch(error) {
         console.log(error.message);
