@@ -9,7 +9,6 @@ import { DATAMOVIES } from "../redux/types/reduxTypes";
 const Main = ({ pageNumber, setPageNumber }) => {
   const dispatch = useDispatch();
   const dataMovies = useSelector((state) => state.dataMovies);
-  const loginInformation = useSelector((state) => state.loginInformation)
   const searchMovie = useSelector((state) => state.searchMovie)
   const [totalPages, setTotalPages] =useState(1)
 
