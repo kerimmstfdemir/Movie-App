@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MovieDetailedOverview } from "./MovieDetail.styled";
+import notfoundposter from "../assets/default-movie.jpg"
 
 const MovieDetail = () => {
   const navigate = useNavigate()
@@ -13,12 +14,10 @@ const MovieDetail = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
   const videoUrl = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`
 
-  console.log(movieDetails)
-
   const getMovieVideos = async () => {
     try{
       const videos = await axios(videoUrl);
-      setVideoKey(videos.data.results[0].key)
+      setVideoKey(videos.data?.results[0]?.key)
     }catch(error){
       console.log(error.message);
     }
@@ -44,7 +43,7 @@ const MovieDetail = () => {
 
       <div className="d-flex justify-content-center">
         <div className="d-flex mt-4" style={{gap:"1rem", maxWidth:"70rem", borderRadius:"20px", backgroundColor:"rgba(27, 28, 30, 0.9)"}}>
-        <img style={{width:"20rem", borderRadius:"20px"}} src={`https://image.tmdb.org/t/p/w1280${poster_path}`} />
+        <img style={{width:"20rem", borderRadius:"20px"}} src={poster_path ? `https://image.tmdb.org/t/p/w1280${poster_path}` : notfoundposter} />
         <div className="d-flex flex-column justify-content-between p-3">
           <div>
           <h3 style={{color:"white"}}>Overview</h3>

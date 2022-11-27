@@ -32,10 +32,9 @@ const Main = ({ pageNumber, setPageNumber }) => {
 
   useEffect(() => {
     searchMovie ? searchMovies() : getMovies();
-  }, [pageNumber]);
+  }, [pageNumber,searchMovie]);
 
-  console.log(loginInformation)
-  console.log(dataMovies)
+  
   return (
     <div>
       <SearchMovie searchMovies={searchMovies} setPageNumber={setPageNumber} pageNumber={pageNumber}/>

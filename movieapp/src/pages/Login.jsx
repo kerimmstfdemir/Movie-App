@@ -105,10 +105,6 @@ const Login = () => {
       })
   }
 
-  console.log(`USER ${email}, pass : ${password}`)
-  console.log(loginInformation)
-  console.log(user)
-
   return (
     <div className="d-flex">
       <LoginStyledDıvImg></LoginStyledDıvImg>

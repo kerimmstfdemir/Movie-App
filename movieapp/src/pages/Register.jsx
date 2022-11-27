@@ -104,8 +104,6 @@ const Register = () => {
     }
   }
 
-  console.log(user)
-
   return (
     <div className="d-flex">
       <RegisterStyledDıvImg>

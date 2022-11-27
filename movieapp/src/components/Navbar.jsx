@@ -19,8 +19,6 @@ const Navbar = ({ setPageNumber }) => {
     const dataMovies = useSelector((state) => state.dataMovies)
     const user = useSelector((state) => state.user);
     
-    console.log(user)
-
     const movieAppHome = () => {
       navigate("/");
       dispatch({type:SEARCHMOVIE, search:""})
@@ -39,7 +37,6 @@ const Navbar = ({ setPageNumber }) => {
       }
     }
 
-    console.log(loginInformation)
   return (
     <div>
          <Box sx={{ flexGrow: 1 }}>
