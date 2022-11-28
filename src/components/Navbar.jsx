@@ -52,7 +52,7 @@ const Navbar = ({ setPageNumber }) => {
           </div>) }
           { loginInformation && (<div>
           <h5 style={{display:"inline"}}>{user?.user?.displayName || user}</h5>
-          <Button sx={{fontSize:"medium"}} color="inherit" onClick={() => navigate("/register")} onClick={handleLogout}>Logout</Button>
+          <Button sx={{fontSize:"medium"}} color="inherit" onClick={handleLogout}>Logout</Button>
           </div>) }
         </Toolbar>
       </AppBar>

@@ -25,7 +25,7 @@ const MovieDetail = () => {
 
   useEffect(() => {
     getMovieVideos();
-  }, [])
+  })
   
   return (
     <div className="d-flex flex-column ">
