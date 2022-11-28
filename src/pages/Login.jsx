@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../redux/types/reduxTypes";
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { toastSuccessNotify, toastErrorNotify } from "../helpers/ToastifyNotifies";
+import { toastSuccessNotify, toastErrorNotify, toastInfoNotify } from "../helpers/ToastifyNotifies";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -73,7 +73,8 @@ const Login = () => {
         navigate("/");
         toastSuccessNotify("Logged in successfully!");
       } catch (error) {
-        console.log(error.message)
+        toastErrorNotify("User not found!")
+        toastInfoNotify("You must be register to login.")
       }
     }
   }
