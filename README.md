@@ -2,6 +2,9 @@
 
 * In this project, a Movie App. was created in the React environment using data from The Movie Database (TMDB) API.
 * Google Firebase is used for backened operations such as Login and Register.
+* You can access the live version of the project from the following link.
+
+  https://movieapp-d3xe.onrender.com
 
 ## Project Skeleton
 
@@ -57,42 +60,42 @@ Movie-App (main folder)
 
 * #### Get all movie data
 
-```http
+```
  GET https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `API_KEY` | `string` | **Necessary**. Your API Key. |
+| `API_KEY` | `string` | **Required**. Your API Key. |
 
 * #### Search Movie
 
-```http
+```
  GET https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query={QUERY}
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :-------------------------------- |
-| `API_KEY` | `string` | **Necessary**. Your API Key. |
-| `QUERY`   | `string` | **Necessary**. Search query value. |
+| `API_KEY` | `string` | **Required**. Your API Key. |
+| `QUERY`   | `string` | **Required**. Search query value. |
 
 * #### To get Videos Key
 
-```http
+```
  GET https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}
 ```
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :-------------------------------- |
-| `API_KEY` | `string` | **Necessary**. Your API Key. |
-| `id`      | `number` | **Necessary**. Can be obtained from results returning data. |
+| `API_KEY` | `string` | **Required**. Your API Key. |
+| `id`      | `number` | **Required**. Can be obtained from results returning data. |
 
 * #### For Movie images `src`
 
-```http
+```
  https://image.tmdb.org/t/p/w1280${poster_path}
 ```
 
 | Parameter     | Type     | Description                |
 | :--------     | :------- | :-------------------------------- |
-| `poster_path` | `string` | **Necessary**. Can be obtained from results returning data. |
+| `poster_path` | `string` | **Required**. Can be obtained from results returning data. |
