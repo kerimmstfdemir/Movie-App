@@ -68,7 +68,7 @@ const MovieDetail = () => {
         </div>
         </div>
       </div>
-    <button onClick={()=>navigate(-2)}>Go Back</button>
+    <button onClick={()=>navigate(-2)}>Go Back</button> 
     </div>
   )
 }
