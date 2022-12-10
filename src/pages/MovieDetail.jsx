@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { MovieDetailedOverview } from "./MovieDetail.styled";
 import notfoundposter from "../assets/default-movie.jpg"
+import { textAlign } from "@mui/system";
 
 const MovieDetail = () => {
   const navigate = useNavigate()
@@ -68,7 +69,9 @@ const MovieDetail = () => {
         </div>
         </div>
       </div>
-    <button onClick={()=>navigate(-2)}>Go Back</button> 
+      <div className="d-flex justify-content-center">
+    <button type="button" className="btn" style={{width:"10rem", height:"3rem", textAlign:"center", fontSize:"1.3rem", margin:"1rem", color:"white", backgroundColor:"#3D5A73"}} onClick={()=>navigate(-1)}>Go Back</button> 
+    </div>
     </div>
   )
 }
