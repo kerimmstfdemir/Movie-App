@@ -56,6 +56,10 @@ Movie-App (main folder)
 └── yarn.lock
 ```
 
+## DEMO
+
+https://user-images.githubusercontent.com/56498001/206894448-f6aa084e-171b-4721-90f0-0a6ee5ba7e3d.mp4
+
 ## API USAGE
 
 * #### Get all movie data
