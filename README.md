@@ -1,7 +1,7 @@
 ## MovieApp
 
 * In this project, a Movie App. was created in the React environment using data from The Movie Database (TMDB) API.
-* Google Firebase is used for backened operations such as Login and Register.
+* Google Firebase is used for backend operations such as Login and Register.
 * You can access the live version of the project from the following link.
 
   https://movieapp-d3xe.onrender.com
